@@ -1,1 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural Wireframe Template: Business Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-background-base: #1E2522;
+            --color-surface-mid: #2A3430;
+            --color-surface-darker: #3D4C47;
+            --color-dark-text: #E0E0E0;
+            --color-primary: #4CAF50;
+            --color-accent: #A2E880;
+            --color-footer: #151A18;
+            --color-shadow: rgba(0, 0, 0, 0.6);
+            --color-shadow-hover: rgba(76, 175, 80, 0.5);
+            --gradient-hero: linear-gradient(180deg, var(--color-surface-mid), var(--color-background-base));
+            --gradient-cta-primary: linear-gradient(180deg, var(--color-accent), var(--color-primary));
+            --gradient-footer: linear-gradient(180deg, var(--color-surface-mid), var(--color-footer));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background-base); 
+            color: var(--color-dark-text); 
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .service-card, .usp-card, .guarantee-card, .main-logo-frame, .commitment-graphic, .contact-form-box {
+            position: relative; 
+            transition: all 0.3s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+
+        .cta-button {
+            display: inline-block; background: var(--gradient-cta-primary); color: var(--color-footer); padding: 12px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 10px var(--color-shadow); border: none; cursor: pointer;
+        }
+        .cta-button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 0 15px var(--color-primary), 0 6px 15px var(--color-shadow-hover); 
+        }
+        .cta-button.secondary { background-color: var(--color-surface-mid); color: var(--color-dark-text); background-image: none; border: 1px solid var(--color-primary); }
+        .cta-button.secondary:hover { color: var(--color-accent); box-shadow: 0 0 10px var(--color-accent); }
+
+        header { position: sticky; top: 0; background-color: var(--color-surface-mid); box-shadow: 0 2px 8px var(--color-shadow); z-index: 1010;  }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none;
+            gap: 10px; 
+        } 
+        .h-logo {
+            height: 40px; 
+            width: 40px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .h-logo:hover {
+            transform: rotate(10deg) scale(1.05);
+        }
+        .h-company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-links a { 
+            color: var(--color-dark-text); 
+            text-decoration: none; 
+            margin-left: 20px; 
+            font-weight: 400; 
+            transition: color 0.3s ease; 
+        }
+        .nav-links a:hover { color: var(--color-accent); }
+        .nav-links a.active {
+            color: var(--color-accent);
+            text-shadow: 0 0 5px var(--color-primary);
+        }
+        .mobile-menu-button { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 10px; border-radius: 5px; color: var(--color-dark-text); }
+        .mobile-menu { display: none; flex-direction: column; background-color: var(--color-surface-mid); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 20px; }
+        .mobile-menu a { padding: 10px 0; text-decoration: none; color: var(--color-dark-text); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        .logo-banner {
+            background-color: var(--color-background-base); 
+            text-align: center; 
+            border-bottom: 2px solid var(--color-primary);
+            box-shadow: 0 5px 15px var(--color-shadow);
+        }
+
+        .main-logo-frame {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            margin: 0 auto;
+            max-width: 500px; 
+            
+            background-color: var(--color-surface-mid);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+
+            transition: all 0.3s ease; 
+            border: 4px solid transparent; 
+            
+            aspect-ratio: 1 / 1; 
+            width: 90%; 
+        }
+
+        .main-logo-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 35px var(--color-primary);
+            border-color: var(--color-accent); 
+        }
+
+        .logo-pre-text {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--color-dark-text);
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        
+        .logo-post-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-top: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-image-wrapper {
+            flex-grow: 1; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .main-logo-display-img {
+            max-width: 50%; 
+            max-height: 100%;
+            height: auto;
+            width: auto;
+            border-radius: 50%; 
+            object-fit: contain;
+        }
+
+        .section-padding h2 { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin-bottom: 50px; 
+            color: var(--color-primary); 
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero { background: var(--gradient-hero); text-align: center; padding: 100px 20px; border-bottom: 5px solid var(--color-primary); }
+        .hero h1 { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            margin-bottom: 15px; 
+            line-height: 1.1; 
+            color: var(--color-dark-text); 
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
+        .hero h1 span { color: var(--color-primary); }
+        .hero p { font-size: 1.4rem; opacity: 0.85; max-width: 800px; margin: 0 auto 30px; }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        
+        .service-card, .usp-card, .guarantee-card { background-color: var(--color-surface-mid); padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px var(--color-shadow); text-align: center; transition: transform 0.3s ease; border: 1px solid var(--color-footer); cursor: pointer; }
+        .service-card:hover, .usp-card:hover, .guarantee-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px var(--color-shadow-hover); }
+        
+        .service-card .icon, .usp-card .icon, .guarantee-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .service-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: var(--color-accent); }
+        .usp-card { border: 2px solid var(--color-primary); }
+        .usp-card .icon { color: var(--color-accent); }
+        .guarantee-card { border-bottom: 5px solid var(--color-accent); height: 100%; display: flex; flex-direction: column; align-items: center; }
+        .guarantee-card .icon { color: var(--color-primary); font-size: 3rem; }
+
+
+        .commitment-content { display: flex; align-items: center; gap: 50px; }
+        .commitment-text { flex: 1; }
+        .feature-list li { display: flex; align-items: flex-start; margin-bottom: 20px; }
+        .feature-list svg { width: 24px; height: 24px; color: var(--color-accent); flex-shrink: 0; margin-right: 15px; margin-top: 4px; }
+        .feature-list h4 { font-size: 1.2rem; font-weight: 700; color: var(--color-accent); }
+        .commitment-graphic { 
+            flex: 1; background-color: var(--color-surface-mid); 
+            border-radius: 15px; min-height: 400px; display: flex; 
+            align-items: center; justify-content: center; padding: 30px; 
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); 
+
+            cursor: pointer; 
+        }
+
+        .commitment-graphic:hover {
+            box-shadow: 0 0 20px var(--color-primary), inset 0 0 10px var(--color-accent);
+            transform: scale(1.02);
+        }
+        .commitment-graphic span { font-size: 3rem; color: var(--color-primary); font-weight: 700; text-align: center; }
+
+        .contact { background-color: var(--color-background-base); text-align: center; }
+
+        .contact-form-box { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background-color: var(--color-surface-mid); 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px var(--color-shadow); 
+            text-align: left; 
+            border: 2px solid var(--color-primary); 
+            margin-bottom: 40px; 
+            
+            cursor: pointer;
+        }
+
+        .contact-form-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--color-shadow), 0 0 15px rgba(162, 232, 128, 0.4); 
+            border-color: var(--color-accent);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; color: var(--color-dark-text); margin-bottom: 5px; }
+        
+        .form-group input, .form-group textarea, .form-group select { 
+            width: 100%; padding: 12px; border: 1px solid var(--color-footer); 
+            border-radius: 8px; background-color: var(--color-background-base); 
+            color: var(--color-dark-text);
+            -webkit-appearance: none; 
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23E0E0E0'%3E%3Cpath d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7em top 50%;
+            background-size: 0.65em auto;
+        }
+        
+        .form-message { padding: 15px; border-radius: 8px; font-weight: 600; text-align: center; margin-top: 20px; }
+        .form-message.success { background-color: var(--color-primary); color: var(--color-footer); border: 1px solid var(--color-accent); }
+        .hidden { display: none; }
+        
+        footer { background: var(--gradient-footer); color: var(--color-dark-text); padding: 50px 20px; text-align: center; }
+        .footer-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; }
+        .footer-logo span { color: var(--color-accent); }
+        .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; flex-wrap: wrap; }
+        .project-disclaimer { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.95rem; font-weight: 600; color: var(--color-accent); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-button { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-padding h2, .commitment-text h2, .contact h2 { font-size: 2rem; }
+            .commitment-content { flex-direction: column; gap: 30px; }
+            .main-logo-frame {
+                aspect-ratio: 1 / 1; 
+                width: 95%; 
+                max-width: 300px; 
+            }
+            .logo-pre-text { font-size: 1.2rem; }
+            .logo-post-text { font-size: 1.6rem; }
+            .main-logo-display-img { max-width: 60%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#home" class="logo">
+                <img id="header-logo" src="https://placehold.co/40x40/4CAF50/1E2522?text=C" alt="Company Logo Icon" class="h-logo">
+                <span class="h-company-name">Company Name</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Services Section</a>
+                <a href="#usps">Competitive Edge</a> 
+                <a href="#guarantee">Trust & Guarantee</a>
+                <a href="#commitment">Company Ethos</a>
+                <a href="#feasibility">Feasibility Demo</a> 
+            </nav>
+
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle menu">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#services">Services Section</a>
+            <a href="#usps">Competitive Edge</a> 
+            <a href="#guarantee">Trust & Guarantee</a>
+            <a href="#commitment">Company Ethos</a>
+            <a href="#feasibility">Feasibility Demo</a> 
+        </div>
+    </header>
+
+    <main id="main-content">
+        
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>
+                    Primary Service/Hook Statement, <span>Key Differentiator</span>.
+                </h1>
+                <p>
+                    Executive Summary: Business Mission Statement Paragraph.
+                </p>
+                <a href="#feasibility" class="cta-button">
+                    Explore Service Plans
+                </a>
+            </div>
+        </section>
+
+        <section id="logo-banner" class="logo-banner section-padding">
+            <div class="container">
+                <div class="main-logo-frame">
+                    
+                    <p class="logo-pre-text">WE ARE:</p>
+                    
+                    <div class="logo-image-wrapper">
+                        <img id="main-logo" src="https://placehold.co/300x300/4CAF50/1E2522?text=BIG+LOGO" alt="Main Company Logo" class="main-logo-display-img">
+                    </div>
+
+                    <p class="logo-post-text">COMPANY NAME</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services section-padding">
+            <div class="container">
+                <h2>Core Service Offerings Title</h2>
+                
+                <div class="card-grid reveal">
+                    
+                    <div class="service-card" style="--delay: 0s;">
+                        <span class="icon">🌷</span>
+                        <h3>Service Offering Title 1</h3>
+                        <p>Service Description/Detail Paragraph</p>
+                    </div>
+
+                    <div class="service-card" style="--delay: 0.1s;">
+                        <span class="icon">🌞</span>
+                        <h3>Service Offering Title 2</h3>
+                        <p>Service Description/Detail Paragraph</p>
+                    </div>
+
+                    <div class="service-card" style="--delay: 0.2s;">
+                        <span class="icon">🍁</span>
+                        <h3>Service Offering Title 3</h3>
+                        <p>Service Description/Detail Paragraph</p>
+                    </div>
+
+                    <div class="service-card" style="--delay: 0.3s;">
+                        <span class="icon">🌨️</span>
+                        <h3>Service Offering Title 4</h3>
+                        <p>Service Description/Detail Paragraph</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <section id="usps" class="usps section-padding">
+            <div class="container">
+                <h2>Competitive Advantage Title</h2>
+                
+                <div class="card-grid reveal">
+                    
+                    <div class="usp-card" style="--delay: 0s;">
+                        <span class="icon">🎧</span>
+                        <h3>Competitive Advantage Feature Title 1</h3>
+                        <p>Feature Detail/Proof Point Paragraph 1</p>
+                    </div>
+
+                    <div class="usp-card" style="--delay: 0.1s;">
+                        <span class="icon">🐾</span>
+                        <h3>Competitive Advantage Feature Title 2</h3>
+                        <p>Feature Detail/Proof Point Paragraph 2</p>
+                    </div>
+
+                    <div class="usp-card" style="--delay: 0.2s;">
+                        <span class="icon">💰</span>
+                        <h3>Competitive Advantage Feature Title 3</h3>
+                        <p>Feature Detail/Proof Point Paragraph 3</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="guarantee" class="guarantee section-padding">
+            <div class="container">
+                <h2>Customer Trust & Guarantee Title</h2>
+                <div class="card-grid reveal">
+                    
+                    <div class="guarantee-card" style="--delay: 0s;">
+                        <span class="icon">✨</span>
+                        <h3>Guarantee Policy Title 1</h3>
+                        <p>Guarantee Policy Detail Paragraph</p>
+                    </div>
+
+                    <div class="guarantee-card" style="--delay: 0.1s;">
+                        <span class="icon">🌿</span>
+                        <h3>Guarantee Policy Title 2</h3>
+                        <p>Guarantee Policy Detail Paragraph</p>
+                    </div>
+
+                    <div class="guarantee-card" style="--delay: 0.2s;">
+                        <span class="icon">🤝</span>
+                        <h3>Early Adopter Incentive Title</h3>
+                        <p>Incentive/Launch Offer Detail Paragraph</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="commitment" class="commitment section-padding">
+            <div class="container commitment-content">
+                
+                <div class="commitment-text reveal">
+                    <h2>Company Ethos and Responsibility Title</h2>
+                    <p>
+                        Ethos Summary Paragraph/Statement.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li>
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <div>
+                                <h4>Ethos Feature Point 1 Header</h4>
+                                <p>Ethos Feature Point 1 Detail</p>
+                            </div>
+                        </li>
+                        <li>
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.275a1.86 1.86 0 00-2.222-2.222C17.025 5.385 16.5 6.137 16 8c-1.285 4.88-5.187 8.782-10.066 10.066C3.863 19.5 4.115 20 4.882 20.382a1.86 1.86 0 002.222-2.222c-.382-.767-.633-1.52-.766-2.382C5.976 13.91 10.09 9.976 14.882 8.066z"></path></svg>
+                            <div>
+                                <h4>Ethos Feature Point 2 Header</h4>
+                            <p>Ethos Feature Point 2 Detail</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="commitment-graphic reveal">
+                    <span>BRAND SLOGAN: Clean | Quiet | Conscious</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="feasibility" class="contact section-padding">
+            <div class="container">
+                <h2 class="reveal">Feasibility Inquiry & Contact</h2>
+                
+                <p class="reveal" style="max-width: 800px; margin: 0 auto 30px; opacity: 0.8;">
+                    Use this form to demonstrate initial interest and data capture for quick feasibility assessment and to begin the proposal conversation.
+                </p>
+
+                <div class="contact-form-box reveal">
+                    <form id="contact-static-form">
+                        <div class="form-group">
+                            <label for="static-email">Email Address</label>
+                            <input type="email" id="static-email" required placeholder="example@investor.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="static-project">Project Scope</label>
+                            <select id="static-project" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="pilot">Pilot Program</option>
+                                <option value="full">Full Implementation</option>
+                                <option value="partnership">Strategic Partnership</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="static-message">Brief Message / Key Question</label>
+                            <textarea id="static-message" rows="4" required placeholder="Describe your interest..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button" id="submit-static-button" style="width: 100%;">
+                            Submit Feasibility Inquiry
+                        </button>
+                    </form>
+                    
+                    <div id="static-message-box" class="form-message success hidden">
+                        Thank you! Your inquiry about the feasibility of our solution has been submitted. A representative will reach out within 24 hours. (This message is a simulation.)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            
+            <p class="project-disclaimer">
+                PROJECT DISCLOSURE: Fictional Entity for Academic Proposal.
+            </p>
+
+            <div class="footer-logo">
+                <span>🌱</span> Company Name
+            </div>
+
+            <div class="footer-links">
+                <a href="#services">Footer Link 1</a>
+                <a href="#usps">Footer Link 2</a>
+                <a href="#guarantee">Footer Link 3</a>
+                <a href="#commitment">Footer Link 4</a>
+                <a href="mailto:info@greencycle.com">Fictional Email</a>
+                <a href="tel:5551234567">Fictional Phone Number</a>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const sections = document.querySelectorAll('main section:not(#logo-banner)');
+            
+            const staticForm = document.getElementById('contact-static-form');
+            const staticMessageBox = document.getElementById('static-message-box');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenu.style.display === 'flex';
+                mobileMenu.style.display = isExpanded ? 'none' : 'flex';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            });
+            
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.style.display = 'none';
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            staticForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                staticMessageBox.classList.remove('hidden');
+
+                staticForm.querySelector('button').disabled = true;
+                staticForm.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+                
+                setTimeout(() => {
+                    staticForm.querySelector('button').disabled = false;
+                    staticForm.querySelectorAll('input, select, textarea').forEach(el => el.disabled = false);
+                    staticMessageBox.classList.add('hidden');
+                    staticForm.reset(); 
+                }, 5000);
+            });
+            
+            const revealObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        target.classList.add('active');
+                        
+                        if (target.classList.contains('card-grid')) {
+                            target.querySelectorAll('.service-card, .usp-card, .guarantee-card').forEach((card, index) => {
+                                card.style.transitionDelay = `${index * 0.1}s`;
+                                card.classList.add('active');
+                            });
+                        }
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            }, revealObserverOptions);
+            
+            document.querySelectorAll('.reveal').forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            const headerHeight = 60; 
+            const navObserverOptions = {
+                root: null,
+                rootMargin: `-${headerHeight + 5}px 0px -90% 0px`, 
+                threshold: 0 
+            };
+            
+            let currentActiveId = 'home'; 
+
+            const setActiveLink = (id) => {
+                if (currentActiveId === id) return;
+                
+                document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                const targetLink = document.querySelector(`.nav-links a[href="#${id}"]`); 
+                const mobileTargetLink = document.querySelector(`#mobile-menu a[href="#${id}"]`); 
+                
+                if (targetLink) {
+                    targetLink.classList.add('active');
+                }
+                if (mobileTargetLink) {
+                    mobileTargetLink.classList.add('active');
+                }
+
+                currentActiveId = id; 
+            };
+            
+            setActiveLink(currentActiveId); 
+
+            const navObserver = new IntersectionObserver((entries) => {
+                let activeId = 'home'; 
+                
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activeId = entry.target.getAttribute('id');
+                    }
+                });
+
+                if (window.scrollY < 50) {
+                    activeId = 'home';
+                }
+
+                setActiveLink(activeId);
+            }, navObserverOptions);
+            
+            sections.forEach(section => {
+                navObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
 
