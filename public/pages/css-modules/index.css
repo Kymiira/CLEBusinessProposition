@@ -186,7 +186,7 @@
 
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
         
-        .service-card, .usp-card, .guarantee-card { background-color: var(--color-surface-mid); padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px var(--color-shadow); text-align: center; transition: transform 0.3s ease; border: 1px solid var(--color-footer); cursor: pointer; }
+        .service-card, .usp-card, .guarantee-card, .service-card.all-year { background-color: var(--color-surface-mid); padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px var(--color-shadow); text-align: center; transition: transform 0.3s ease; border: 1px solid var(--color-footer); cursor: pointer; }
         .service-card:hover, .usp-card:hover, .guarantee-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px var(--color-shadow-hover); }
         
         .service-card .icon, .usp-card .icon, .guarantee-card .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
@@ -198,7 +198,7 @@
         .usp-card .icon { color: var(--color-accent); }
         .guarantee-card { border-bottom: 5px solid var(--color-accent); height: 100%; display: flex; flex-direction: column; align-items: center; }
         .guarantee-card .icon { color: var(--color-primary); font-size: 3rem; }
-        .service-card.all-year { border: 2px solid var(--color-primary); }
+        
 
 
         .commitment-content { display: flex; align-items: center; gap: 50px; }
