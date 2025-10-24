@@ -39,8 +39,6 @@
             align-self : center; 
             margin-left: auto;
             margin-right: auto;
-            transition: all 0.3s ease;
-            will-change: transform, box-shadow;
         }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -201,7 +199,7 @@
         .usp-card .icon { color: var(--color-accent); }
         .guarantee-card { border-bottom: 5px solid var(--color-accent); height: 100%; display: flex; flex-direction: column; align-items: center; }
         .guarantee-card .icon { color: var(--color-primary); font-size: 3rem; }
-        . service-card.all-year { border: 2px solid var(--color-accent); }
+        .service-card.all-year { border: 2px solid var(--color-accent); }
 
 
         .commitment-content { display: flex; align-items: center; gap: 50px; }
